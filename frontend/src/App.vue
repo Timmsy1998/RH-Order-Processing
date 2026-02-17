@@ -172,9 +172,45 @@ const resetForm = () => {
   subscriptionDuration.value = '';
 };
 
-// TODO: Implement the addProduct function
-// This function should create a new Product and add it to the order 
-// then reset the form
+// Completed: addProduct creates the correct Product instance from form data,
+// adds it to the order, and resets the form inputs.
+const addProduct = () => {
+  errorMessage.value = '';
+
+  const name = productName.value.trim();
+  const price = Number(productPrice.value);
+  const quantity = Number(productQuantity.value);
+
+  if (!name || Number.isNaN(price) || Number.isNaN(quantity)) {
+    errorMessage.value = 'Please enter valid product details.';
+    return;
+  }
+
+  let product;
+
+  switch (productType.value) {
+    case 'digital':
+      product = new DigitalProduct(name, price, quantity, downloadLink.value);
+      break;
+    case 'physical':
+      product = new PhysicalProduct(name, price, quantity, Number(weight.value));
+      break;
+    case 'subscription':
+      product = new SubscriptionProduct(
+        name,
+        price,
+        quantity,
+        Number(subscriptionDuration.value)
+      );
+      break;
+    default:
+      errorMessage.value = 'Unsupported product type.';
+      return;
+  }
+
+  order.value.addProduct(product);
+  resetForm();
+};
 
 // TODO: Implement the calculation of the order total
 // const orderTotal = ?;
