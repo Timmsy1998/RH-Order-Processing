@@ -1,14 +1,36 @@
 <template>
-  <div class="container mx-auto p-4">
-    <h1 class="text-2xl font-bold mb-4">Order Manager</h1>
+  <div
+    class="relative mx-auto max-w-5xl px-5 pb-14 pt-10 [font-family:'Manrope','Segoe_UI','Trebuchet_MS',sans-serif] sm:px-6 sm:pt-12"
+  >
+    <div
+      class="pointer-events-none absolute -left-16 -top-24 -z-10 h-80 w-80 animate-pulse rounded-full bg-sky-400/40 blur-3xl"
+    ></div>
+    <div
+      class="pointer-events-none absolute -right-20 top-56 -z-10 h-80 w-80 animate-pulse rounded-full bg-teal-300/40 blur-3xl [animation-delay:600ms]"
+    ></div>
+
+    <header class="mb-6">
+      <p class="mb-1 text-[0.72rem] font-extrabold uppercase tracking-[0.15em] text-slate-600">
+        Order Processing
+      </p>
+      <h1
+        class="m-0 text-[clamp(1.8rem,4vw,2.5rem)] font-bold leading-[1.05] tracking-[-0.02em] [font-family:'Space_Grotesk','Segoe_UI',sans-serif]"
+      >
+        Order Manager
+      </h1>
+      <p class="mt-2 max-w-2xl text-slate-700">
+        Build an order with digital, physical, and subscription products.
+      </p>
+    </header>
 
     <form
       @submit.prevent="addProduct"
-      class="mb-8 bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
+      class="mb-4 rounded-2xl border border-white/90 bg-white/80 p-5 shadow-[0_12px_28px_rgba(16,24,40,0.08)] backdrop-blur md:p-6"
     >
-      <div class="mb-4">
+      <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
+        <div class="mb-3.5">
         <label
-          class="block text-gray-700 text-sm font-bold mb-2"
+          class="mb-1.5 block text-[0.8rem] font-bold text-slate-700"
           for="productType"
         >
           Product Type
@@ -16,7 +38,7 @@
         <select
           v-model="productType"
           id="productType"
-          class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          class="w-full rounded-xl border border-slate-300 bg-white/90 px-3 py-2.5 text-[0.95rem] text-slate-900 transition focus:border-blue-700 focus:outline-none focus:ring-4 focus:ring-blue-700/15"
         >
           <option value="digital">Digital</option>
           <option value="physical">Physical</option>
@@ -24,9 +46,9 @@
         </select>
       </div>
 
-      <div class="mb-4">
+      <div class="mb-3.5">
         <label
-          class="block text-gray-700 text-sm font-bold mb-2"
+          class="mb-1.5 block text-[0.8rem] font-bold text-slate-700"
           for="productName"
         >
           Product Name
@@ -35,14 +57,14 @@
           v-model="productName"
           id="productName"
           type="text"
-          class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          class="w-full rounded-xl border border-slate-300 bg-white/90 px-3 py-2.5 text-[0.95rem] text-slate-900 transition focus:border-blue-700 focus:outline-none focus:ring-4 focus:ring-blue-700/15"
           required
         />
       </div>
 
-      <div class="mb-4">
+      <div class="mb-3.5">
         <label
-          class="block text-gray-700 text-sm font-bold mb-2"
+          class="mb-1.5 block text-[0.8rem] font-bold text-slate-700"
           for="productPrice"
         >
           Price
@@ -52,14 +74,14 @@
           id="productPrice"
           type="number"
           step="0.01"
-          class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          class="w-full rounded-xl border border-slate-300 bg-white/90 px-3 py-2.5 text-[0.95rem] text-slate-900 transition focus:border-blue-700 focus:outline-none focus:ring-4 focus:ring-blue-700/15"
           required
         />
       </div>
 
-      <div class="mb-4">
+      <div class="mb-3.5">
         <label
-          class="block text-gray-700 text-sm font-bold mb-2"
+          class="mb-1.5 block text-[0.8rem] font-bold text-slate-700"
           for="productQuantity"
         >
           Quantity
@@ -68,14 +90,15 @@
           v-model="productQuantity"
           id="productQuantity"
           type="number"
-          class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          class="w-full rounded-xl border border-slate-300 bg-white/90 px-3 py-2.5 text-[0.95rem] text-slate-900 transition focus:border-blue-700 focus:outline-none focus:ring-4 focus:ring-blue-700/15"
           required
         />
       </div>
+      </div>
 
-      <div v-if="productType === 'digital'" class="mb-4">
+      <div v-if="productType === 'digital'" class="mb-3.5">
         <label
-          class="block text-gray-700 text-sm font-bold mb-2"
+          class="mb-1.5 block text-[0.8rem] font-bold text-slate-700"
           for="downloadLink"
         >
           Download Link
@@ -84,12 +107,12 @@
           v-model="downloadLink"
           id="downloadLink"
           type="url"
-          class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          class="w-full rounded-xl border border-slate-300 bg-white/90 px-3 py-2.5 text-[0.95rem] text-slate-900 transition focus:border-blue-700 focus:outline-none focus:ring-4 focus:ring-blue-700/15"
         />
       </div>
 
-      <div v-if="productType === 'physical'" class="mb-4">
-        <label class="block text-gray-700 text-sm font-bold mb-2" for="weight">
+      <div v-if="productType === 'physical'" class="mb-3.5">
+        <label class="mb-1.5 block text-[0.8rem] font-bold text-slate-700" for="weight">
           Weight
         </label>
         <input
@@ -97,13 +120,13 @@
           id="weight"
           type="number"
           step="0.01"
-          class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          class="w-full rounded-xl border border-slate-300 bg-white/90 px-3 py-2.5 text-[0.95rem] text-slate-900 transition focus:border-blue-700 focus:outline-none focus:ring-4 focus:ring-blue-700/15"
         />
       </div>
 
-      <div v-if="productType === 'subscription'" class="mb-4">
+      <div v-if="productType === 'subscription'" class="mb-3.5">
         <label
-          class="block text-gray-700 text-sm font-bold mb-2"
+          class="mb-1.5 block text-[0.8rem] font-bold text-slate-700"
           for="subscriptionDuration"
         >
           Subscription Duration (months)
@@ -112,14 +135,14 @@
           v-model="subscriptionDuration"
           id="subscriptionDuration"
           type="number"
-          class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          class="w-full rounded-xl border border-slate-300 bg-white/90 px-3 py-2.5 text-[0.95rem] text-slate-900 transition focus:border-blue-700 focus:outline-none focus:ring-4 focus:ring-blue-700/15"
         />
       </div>
 
-      <div class="flex items-center justify-between">
+      <div class="mt-2">
         <button
           type="submit"
-          class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+          class="rounded-xl bg-gradient-to-br from-teal-700 to-blue-700 px-4 py-2.5 text-[0.92rem] font-bold text-slate-50 shadow-[0_10px_20px_rgba(29,78,216,0.2)] transition hover:-translate-y-px hover:shadow-[0_14px_24px_rgba(15,23,42,0.22)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-700"
         >
           Add Product
         </button>
@@ -128,28 +151,32 @@
 
     <div
       v-if="errorMessage"
-      class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4"
+      class="mb-4 rounded-xl border border-rose-300 bg-rose-100 px-4 py-3 text-[0.92rem] text-rose-700"
       role="alert"
     >
-      <span class="block sm:inline">{{ errorMessage }}</span>
+      <span>{{ errorMessage }}</span>
     </div>
 
-    <div class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
-      <h2 class="text-xl font-bold mb-4">Current Order</h2>
-      <div class="text-xl font-bold">Total: ${{ orderTotal }}</div>
+    <div class="rounded-2xl border border-white/90 bg-white/80 p-5 shadow-[0_12px_28px_rgba(16,24,40,0.08)] backdrop-blur md:p-6">
+      <div class="flex flex-wrap items-center justify-between gap-3">
+        <h2 class="m-0 text-[1.08rem] font-bold tracking-[-0.01em]">Current Order</h2>
+        <div class="rounded-full border border-blue-200 bg-gradient-to-br from-blue-50 to-blue-100 px-3.5 py-1.5 text-[0.84rem] font-bold text-blue-900">
+          Total: ${{ orderTotal }}
+        </div>
+      </div>
 
       <!-- Completed: list products in the current order and update reactively. -->
-      <ul v-if="order.products.length" class="mt-4 space-y-2">
+      <ul v-if="order.products.length" class="mt-4 grid list-none gap-2.5 p-0">
         <li
           v-for="(product, index) in order.products"
           :key="`${product.name}-${index}`"
-          class="border rounded px-3 py-2"
+          class="flex items-center justify-between gap-3 rounded-xl border border-slate-200 bg-white/90 px-3.5 py-3"
         >
-          <span class="font-medium">{{ product.name }}</span>
-          <span class="ml-2 text-gray-600">${{ Number(product.price).toFixed(2) }}</span>
+          <span class="font-bold text-slate-900">{{ product.name }}</span>
+          <span class="tabular-nums text-slate-600">${{ Number(product.price).toFixed(2) }}</span>
         </li>
       </ul>
-      <p v-else class="mt-4 text-gray-500">No products added yet.</p>
+      <p v-else class="mt-4 text-slate-500">No products added yet.</p>
     </div>
   </div>
 </template>
