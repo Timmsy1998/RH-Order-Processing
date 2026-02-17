@@ -136,9 +136,20 @@
 
     <div class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
       <h2 class="text-xl font-bold mb-4">Current Order</h2>
-      <!-- TODO: Implement the list of products in the current order -->
-
       <div class="text-xl font-bold">Total: ${{ orderTotal }}</div>
+
+      <!-- Completed: list products in the current order and update reactively. -->
+      <ul v-if="order.products.length" class="mt-4 space-y-2">
+        <li
+          v-for="(product, index) in order.products"
+          :key="`${product.name}-${index}`"
+          class="border rounded px-3 py-2"
+        >
+          <span class="font-medium">{{ product.name }}</span>
+          <span class="ml-2 text-gray-600">${{ Number(product.price).toFixed(2) }}</span>
+        </li>
+      </ul>
+      <p v-else class="mt-4 text-gray-500">No products added yet.</p>
     </div>
   </div>
 </template>
