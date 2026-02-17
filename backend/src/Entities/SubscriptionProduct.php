@@ -2,13 +2,15 @@
 
 declare(strict_types=1);
 
-class DigitalProduct extends Product
+namespace App\Entities;
+
+class SubscriptionProduct extends Product
 {
     public function __construct(
         string $name,
         float $price,
         int $quantity,
-        private string $downloadLink
+        private int $subscriptionDuration
     ) {
         parent::__construct($name, $price, $quantity);
     }

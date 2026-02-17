@@ -2,6 +2,10 @@
 
 declare(strict_types=1);
 
+namespace App\Entities;
+
+use App\Contracts\OrderItem;
+
 class Order
 {
     /** @var OrderItem[] */
