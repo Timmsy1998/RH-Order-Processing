@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 class Order
 {
-    /** @var Product[] */
+    /** @var OrderItem[] */
     private array $products = [];
 
-    public function addProduct(Product $product): void
+    public function addProduct(OrderItem $product): void
     {
         $this->products[] = $product;
     }

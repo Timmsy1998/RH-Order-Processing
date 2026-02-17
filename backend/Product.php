@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-class Product
+class Product implements OrderItem
 {
     public function __construct(
         protected string $name,
