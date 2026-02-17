@@ -2,14 +2,21 @@
 
 declare(strict_types=1);
 
-class SubscriptionProduct extends Product
+namespace App\Entities;
+
+class PhysicalProduct extends Product
 {
     public function __construct(
         string $name,
         float $price,
         int $quantity,
-        private int $subscriptionDuration
+        private float $weight
     ) {
         parent::__construct($name, $price, $quantity);
+    }
+
+    public function calculateTotal(): float
+    {
+        return $this->baseTotal() * $this->weight;
     }
 }
