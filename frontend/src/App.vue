@@ -223,7 +223,7 @@ const addProduct = () => {
   resetForm();
 };
 
-// TODO: Implement the calculation of the order total
-// const orderTotal = ?;
+// Completed: calculate order total reactively from products in the order.
+const orderTotal = computed(() => order.value.calculateTotal().toFixed(2));
   
 </script>
