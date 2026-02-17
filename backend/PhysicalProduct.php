@@ -15,6 +15,6 @@ class PhysicalProduct extends Product
 
     public function calculateTotal(): float
     {
-        return $this->price * $this->quantity * $this->weight;
+        return $this->baseTotal() * $this->weight;
     }
 }
